@@ -22,20 +22,34 @@ strip_colors() {
     sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
 }
 
+# Function to check if the user has sudo rights
+check_sudo() {
+    sudo -l >/dev/null 2>&1
+    return $?
+}
+
 # Execute commands and display output with headers
+
 header "env" "Checking env variable"
 env | strip_colors
 
 separator
 
-
 header "sudo --version" "1.8.31 Ubuntu 20.04 - 1.8.27 Debian 10 - 1.9.2 Fedora 33 vulnerable"
-sudo --version
+if check_sudo; then
+    sudo --version
+else
+    echo "User does not have sudo rights for this command"
+fi
 
 separator
 
 header "sudo -l"
-sudo -l
+if check_sudo; then
+    sudo -l
+else
+    echo "User does not have sudo rights for this command"
+fi
 
 separator
 
