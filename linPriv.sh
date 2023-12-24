@@ -78,7 +78,7 @@ cat /etc/os-release
 
 separator
 
-header "uname -a" "check for kernel vulnerabilities like Dirty Cow"
+header "uname -a" "check for kernel vulnerabilities like Dirty Cow version 5.8 to 5.17 is vulnerable to dirty pipe"
 uname -a
 
 separator
